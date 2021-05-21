@@ -52,6 +52,11 @@ spec:
               key: crda-key
         - name: HOST
           value: $(params.CRDA_HOST_URL)
+        - name: CONSENT_TELEMETRY
+          valueFrom:
+            secretKeyRef:
+              name: crda
+              key: consent_telemetry
 
       script: |
         #!/bin/sh
@@ -59,4 +64,5 @@ spec:
         sh /crda.sh \
         $(params.manifest-file-path) \
         $(params.output-file-path) \
-        $(params.pkg-installation-directory-path)
+        $(params.pkg-installation-directory-path) \
+        tekton
